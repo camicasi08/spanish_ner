@@ -11,8 +11,10 @@ def compute_f1(predictions, correct, idx2Label):
     for sentence in correct:
         label_correct.append([idx2Label[element] for element in sentence])
 
-    # print("predictions ", len(label_pred))
-    # print("correct labels ", len(label_correct))
+    print("predictions ", len(label_pred))
+    print("correct labels ", len(label_correct))
+    #print("predictions ", label_pred)
+    #print("correct labels ", label_correct)
 
     prec = compute_precision(label_pred, label_correct)
     rec = compute_precision(label_correct, label_pred)
@@ -34,11 +36,15 @@ def compute_precision(guessed_sentences, correct_sentences):
         correct = correct_sentences[sentenceIdx]
         assert (len(guessed) == len(correct))
         idx = 0
+        print("PRED:",guessed)
+        print("CORRECT:",correct)
         while idx < len(guessed):
             if guessed[idx][0] == 'B':  # a new chunk starts
+                print("here")
                 count += 1
-
-                if guessed[idx] == correct[idx]:  # first prediction correct
+                print(guessed[idx],correct[idx])
+                if guessed[idx].replace(" ","") == correct[idx].replace(" ",""):  # first prediction correct
+                    print("here2")
                     idx += 1
                     correctlyFound = True
 
@@ -49,6 +55,7 @@ def compute_precision(guessed_sentences, correct_sentences):
                         idx += 1
 
                     if idx < len(guessed):
+                        print("here3")
                         if correct[idx][0] == 'I':  # chunk in correct was longer
                             correctlyFound = False
 

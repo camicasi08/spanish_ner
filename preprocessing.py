@@ -61,7 +61,7 @@ def createEqualBatches(data):
     #     num_words.append(len(i[0]))
     # num_words = set(num_words)
     
-    n_batches = 100
+    n_batches = 300
     batch_size = len(data) // n_batches
     num_words = [batch_size*(i+1) for i in range(0, n_batches)]
     
